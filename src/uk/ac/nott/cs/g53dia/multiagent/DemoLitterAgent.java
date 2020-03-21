@@ -18,6 +18,8 @@ import java.util.Random;
  */
 public class DemoLitterAgent extends LitterAgent {
 
+    int agentID;
+
     RechargeBehaviour rechargeBehaviour = new RechargeBehaviour(this);
     ExploreBehaviour exploreBehaviour = new ExploreBehaviour(this);
     CollectBehaviour collectBehaviour = new CollectBehaviour(this);
@@ -28,24 +30,44 @@ public class DemoLitterAgent extends LitterAgent {
     StationDetector stationDetector = new StationDetector(this);
 
     ExploredMap exploredMap = new ExploredMap();
-    final int finalTime = 10000;
+    int finalTime = 10000;
 
     public Point agentDestination;
-    final Point errorDestination = new Point(99999999, 99999999);
-    final Point origin = new Point(0, 0);
+    Point errorDestination;
 
-    public DemoLitterAgent() {
-        this(new Random());
+
+    Point origin = new Point(0, 0);
+
+
+    public DemoLitterAgent(int agentID) {
+        this.agentID = agentID;
+        errorDestination = choseErrorDestination();
     }
 
-    /**
-     * The tanker implementation makes random moves. For reproducibility, it
-     * can share the same random number generator as the environment.
-     *
-     * @param r The random number generator.
-     */
-    public DemoLitterAgent(Random r) {
-        this.r = r;
+
+
+    private Point choseErrorDestination() {
+        Point errorDestination = null;
+        System.out.println("this.agentID");
+        System.out.println(this.agentID);
+        switch (this.agentID) {
+            case 0:
+                errorDestination = new Point(99999999, 99999999);
+                System.out.println("case 0");
+                break;
+            case 1:
+                errorDestination = new Point(-99999999, 99999999);
+                System.out.println("case 1");
+                break;
+            case 2:
+                errorDestination = new Point(-99999999, -99999999);
+                break;
+            case 3:
+                errorDestination = new Point(99999999, -99999999);
+                break;
+        }
+
+        return errorDestination;
     }
 
 
@@ -95,6 +117,9 @@ public class DemoLitterAgent extends LitterAgent {
 
 
     public Action senseAndAct(Cell[][] view, long timestep) {
+
+        System.out.println(agentID);
+        System.out.println("x: " + errorDestination.getX() + "y: " + errorDestination.getY());
 
         exploredMap.updateMap(view);
 

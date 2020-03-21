@@ -30,7 +30,7 @@ public class MultiSimulator {
 	 * Time for which execution pauses so that GUI can update. Reducing this
 	 * value causes the simulation to run faster.
 	 */
-	private static int DELAY = 100;
+	private static int DELAY = 20;
 
 	/**
 	 * Number of timesteps to execute.
@@ -43,7 +43,7 @@ public class MultiSimulator {
 		// Create an environment
 		Environment env = new Environment(LitterAgent.MAX_CHARGE/2, r);
 		// Create a MAS
-		MAS mas = new DemoMAS(r);
+		MAS mas = new DemoMAS();
 		// Create a GUI window to show the MAS
 		MASViewer mv = new MASViewer(mas);
 		mv.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);

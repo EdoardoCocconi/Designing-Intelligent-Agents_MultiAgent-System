@@ -27,7 +27,7 @@ public class MultiEvaluator {
 	    // Create an environment
 	    Environment env = new Environment(LitterAgent.MAX_CHARGE/2, r);
 	    // Create a MAS
-	    MAS mas = new DemoMAS(r);
+	    MAS mas = new DemoMAS();
 	    // Start executing the agents
 	    run:
 	    while (env.getTimestep() < DURATION) {
