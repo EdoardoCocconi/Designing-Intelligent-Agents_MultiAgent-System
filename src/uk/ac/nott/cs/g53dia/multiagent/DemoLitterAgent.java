@@ -18,46 +18,55 @@ import java.util.Random;
  */
 public class DemoLitterAgent extends LitterAgent {
 
-    int agentID;
-
-    RechargeBehaviour rechargeBehaviour = new RechargeBehaviour(this);
-    ExploreBehaviour exploreBehaviour = new ExploreBehaviour(this);
-    CollectBehaviour collectBehaviour = new CollectBehaviour(this);
-    DisposeBehaviour disposeBehaviour = new DisposeBehaviour(this);
-
-    LitterDetector litterDetector = new LitterDetector(this);
-    RechargeDetector rechargeDetector = new RechargeDetector(this);
-    StationDetector stationDetector = new StationDetector(this);
-
-    ExploredMap exploredMap = new ExploredMap();
-    int finalTime = 10000;
-
-    public Point agentDestination;
+    final int agentID;
     Point errorDestination;
+    final int errorDestinationX;
+    final int errorDestinationY;
 
+    RechargeBehaviour rechargeBehaviour;
+    ExploreBehaviour exploreBehaviour;
+    CollectBehaviour collectBehaviour;
+    DisposeBehaviour disposeBehaviour;
+    LitterDetector litterDetector;
+    RechargeDetector rechargeDetector;
+    StationDetector stationDetector;
 
-    Point origin = new Point(0, 0);
+    ExploredMap exploredMap;
+    final int finalTime = 10000;
+    public Point agentDestination;
+    Point origin;
 
 
     public DemoLitterAgent(int agentID) {
-        this.agentID = agentID;
-        errorDestination = choseErrorDestination();
-    }
 
+        this.agentID = agentID;
+
+        errorDestination = choseErrorDestination();
+        errorDestinationX = errorDestination.getX();
+        errorDestinationY = errorDestination.getY();
+
+        rechargeBehaviour = new RechargeBehaviour(this);
+        exploreBehaviour = new ExploreBehaviour(this);
+        collectBehaviour = new CollectBehaviour(this);
+        disposeBehaviour = new DisposeBehaviour(this);
+        litterDetector = new LitterDetector(this);
+        rechargeDetector = new RechargeDetector(this);
+        stationDetector = new StationDetector(this);
+
+        exploredMap = new ExploredMap();
+        origin = new Point(0, 0);
+
+    }
 
 
     private Point choseErrorDestination() {
         Point errorDestination = null;
-        System.out.println("this.agentID");
-        System.out.println(this.agentID);
         switch (this.agentID) {
             case 0:
                 errorDestination = new Point(99999999, 99999999);
-                System.out.println("case 0");
                 break;
             case 1:
                 errorDestination = new Point(-99999999, 99999999);
-                System.out.println("case 1");
                 break;
             case 2:
                 errorDestination = new Point(-99999999, -99999999);
@@ -117,9 +126,6 @@ public class DemoLitterAgent extends LitterAgent {
 
 
     public Action senseAndAct(Cell[][] view, long timestep) {
-
-        System.out.println(agentID);
-        System.out.println("x: " + errorDestination.getX() + "y: " + errorDestination.getY());
 
         exploredMap.updateMap(view);
 

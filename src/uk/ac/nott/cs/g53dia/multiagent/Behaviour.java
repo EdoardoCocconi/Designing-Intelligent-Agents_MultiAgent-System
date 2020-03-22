@@ -15,8 +15,8 @@ public abstract class Behaviour {
     }
 
 
-    public Behaviour(LitterAgent agent) {
-        this.agent = (DemoLitterAgent)agent;
+    public Behaviour(DemoLitterAgent agent) {
+        this.agent = agent;
     }
 
 

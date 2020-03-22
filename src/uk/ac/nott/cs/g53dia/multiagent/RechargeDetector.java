@@ -12,7 +12,7 @@ import static sun.security.pkcs11.wrapper.PKCS11Constants.TRUE;
 public class RechargeDetector extends Sensor{
 
 
-    public RechargeDetector(LitterAgent agent) {
+    public RechargeDetector(DemoLitterAgent agent) {
         super(agent);
     }
 
@@ -20,10 +20,10 @@ public class RechargeDetector extends Sensor{
     public Point readSensor(ExploredMap exploredMap){
 
         Point position = agent.getPosition();
-        Point destination = new Point(99999999, 99999999);
+        Point destination = agent.errorDestination;
         int size = 30;
 
-        while (destination.getX() == 99999999 && destination.getY() == 99999999) {
+        while (destination.equals(agent.errorDestination)) {
 
             Cell[][] view = exploredMap.getView(position, size);
 

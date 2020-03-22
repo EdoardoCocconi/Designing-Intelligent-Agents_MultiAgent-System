@@ -10,7 +10,7 @@ import static java.lang.Math.ceil;
 public class LitterDetector extends Sensor {
 
 
-    public LitterDetector(LitterAgent agent) {
+    public LitterDetector(DemoLitterAgent agent) {
         super(agent);
     }
 
@@ -42,7 +42,7 @@ public class LitterDetector extends Sensor {
 
         Point position = agent.getPosition();
         Cell[][] view = exploredMap.getView(position, viewField);
-        Point destination = new Point(99999999, 99999999);
+        Point destination = agent.errorDestination;
         int score = 0;
 
         for (Cell[] row : view) {

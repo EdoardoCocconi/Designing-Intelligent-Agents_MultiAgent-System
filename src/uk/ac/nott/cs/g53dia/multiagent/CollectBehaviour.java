@@ -6,7 +6,7 @@ import uk.ac.nott.cs.g53dia.multilibrary.*;
 public class CollectBehaviour extends Behaviour {
 
 
-    public CollectBehaviour(LitterAgent agent) {
+    public CollectBehaviour(DemoLitterAgent agent) {
         super(agent);
     }
 

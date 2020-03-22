@@ -9,8 +9,8 @@ public abstract class Sensor {
     protected DemoLitterAgent agent;
 
 
-    public Sensor(LitterAgent agent) {
-        this.agent = (DemoLitterAgent)agent;
+    public Sensor(DemoLitterAgent agent) {
+        this.agent = agent;
     }
 
 

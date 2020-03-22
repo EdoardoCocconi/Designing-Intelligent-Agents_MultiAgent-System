@@ -5,7 +5,7 @@ import uk.ac.nott.cs.g53dia.multilibrary.*;
 
 public class RechargeBehaviour extends Behaviour {
 
-    public RechargeBehaviour(LitterAgent agent) {
+    public RechargeBehaviour(DemoLitterAgent agent) {
         super(agent);
     }
 

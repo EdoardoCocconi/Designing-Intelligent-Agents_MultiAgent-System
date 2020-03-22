@@ -6,7 +6,7 @@ import uk.ac.nott.cs.g53dia.multilibrary.*;
 public class StationDetector extends Sensor{
 
 
-    public StationDetector(LitterAgent agent) {
+    public StationDetector(DemoLitterAgent agent) {
         super(agent);
     }
 
@@ -16,8 +16,7 @@ public class StationDetector extends Sensor{
         int size = 30;
         Point position = agent.getPosition();
         Cell[][] view = exploredMap.getView(position, size);
-        Point errorDestination = new Point(99999999, 99999999);
-        Point destination = errorDestination;
+        Point destination = agent.errorDestination;
 
         if (agent.getWasteLevel() != 0) {
 
