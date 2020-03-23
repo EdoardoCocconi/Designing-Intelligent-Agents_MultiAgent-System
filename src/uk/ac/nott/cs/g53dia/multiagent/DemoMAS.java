@@ -5,13 +5,13 @@ import uk.ac.nott.cs.g53dia.multilibrary.*;
 
 public class DemoMAS extends MAS {
 
-    private static int MAS_SIZE = 4;
+    private static int MAS_SIZE = 1;
 
 
     public DemoMAS() {
         // Create the agents
-        for (int i = 0; i < MAS_SIZE; i++) {
-            this.add(new DemoLitterAgent(i));
+        for (int agentID = 0; agentID < MAS_SIZE; agentID++) {
+            this.add(new DemoLitterAgent(agentID));
         }
     }
 }

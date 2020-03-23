@@ -5,6 +5,8 @@ import uk.ac.nott.cs.g53dia.multilibrary.*;
 
 import java.util.Random;
 
+import static java.lang.Math.abs;
+
 /**
  * A simple example LitterAgent
  *
@@ -34,7 +36,10 @@ public class DemoLitterAgent extends LitterAgent {
     ExploredMap exploredMap;
     final int finalTime = 10000;
     public Point agentDestination;
-    Point origin;
+    final Point origin = new Point(0, 0);
+
+    public BehaviourType previousState;
+    public BehaviourType nextState;
 
 
     public DemoLitterAgent(int agentID) {
@@ -54,7 +59,6 @@ public class DemoLitterAgent extends LitterAgent {
         stationDetector = new StationDetector(this);
 
         exploredMap = new ExploredMap();
-        origin = new Point(0, 0);
 
     }
 
@@ -88,9 +92,9 @@ public class DemoLitterAgent extends LitterAgent {
 
         if (rechargeDetector.isRechargeInRange(exploredMap, timestep)) {
             nextState = BehaviourType.BATTERY_BEHAVIOUR;
-        } else if (currentLitter != maxCapacity && (currentLitter == 0 || !litterDetector.readSensor(exploredMap).equals(errorDestination))) {
+        } else if (currentLitter != maxCapacity && (!litterDetector.readSensor(exploredMap).equals(errorDestination))) {
             nextState = BehaviourType.COLLECT_BEHAVIOUR;
-        } else if (!stationDetector.readSensor(exploredMap).equals(errorDestination)) {
+        } else if (currentLitter != 0 && !stationDetector.readSensor(exploredMap).equals(errorDestination)) {
             nextState = BehaviourType.DUMP_BEHAVIOUR;
         } else {
             nextState = BehaviourType.EXPLORE_BEHAVIOUR;
@@ -127,9 +131,16 @@ public class DemoLitterAgent extends LitterAgent {
 
     public Action senseAndAct(Cell[][] view, long timestep) {
 
-        exploredMap.updateMap(view);
+//        System.out.println("Agent " + agentID + this.getPosition() + " score: " + this.getScore() + " map size: " + exploredMap.map.size());
 
-        BehaviourType nextState = sense(exploredMap, timestep);
+
+        exploredMap.updateMap(view);
+        previousState = nextState;
+        nextState = sense(exploredMap, timestep);
+        if (abs(this.getPosition().getX()) > 200 || abs(this.getPosition().getY()) > 200) {
+            System.out.println(this.getPosition());
+            System.out.println(nextState);
+        }
         return act(nextState);
 
     }

@@ -5,6 +5,9 @@ import uk.ac.nott.cs.g53dia.multilibrary.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import static sun.security.pkcs11.wrapper.PKCS11Constants.FALSE;
+import static sun.security.pkcs11.wrapper.PKCS11Constants.TRUE;
+
 
 public class ExploredMap {
 
@@ -33,5 +36,17 @@ public class ExploredMap {
         }
         return res;
     }
+
+
+    public boolean isCellAllowed(DemoLitterAgent agent, Cell cell) {
+        if (cell != null) {
+            if (cell.getPoint().getX() <= 200 && cell.getPoint().getX() >= -200) {
+                if (cell.getPoint().getY() <= 200 && cell.getPoint().getY() >= -200)
+                    return TRUE;
+            }
+        }
+        return FALSE;
+    }
+
 
 }

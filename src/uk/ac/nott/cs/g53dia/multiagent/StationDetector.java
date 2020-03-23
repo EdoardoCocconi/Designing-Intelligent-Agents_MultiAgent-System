@@ -3,7 +3,7 @@ package uk.ac.nott.cs.g53dia.multiagent;
 import uk.ac.nott.cs.g53dia.multilibrary.*;
 
 
-public class StationDetector extends Sensor{
+public class StationDetector extends Sensor {
 
 
     public StationDetector(DemoLitterAgent agent) {
@@ -11,7 +11,7 @@ public class StationDetector extends Sensor{
     }
 
 
-    public Point readSensor(ExploredMap exploredMap){
+    public Point readSensor(ExploredMap exploredMap) {
 
         int size = 30;
         Point position = agent.getPosition();
@@ -22,9 +22,11 @@ public class StationDetector extends Sensor{
 
             for (Cell[] row : view) {
                 for (Cell cell : row) {
-                    if (cell instanceof WasteStation) {
-                        if (agent.getPosition().distanceTo(cell.getPoint()) < agent.getPosition().distanceTo(destination)) {
-                            destination = cell.getPoint();
+                    if (agent.exploredMap.isCellAllowed(agent, cell)) {
+                        if (cell instanceof WasteStation) {
+                            if (agent.getPosition().distanceTo(cell.getPoint()) < agent.getPosition().distanceTo(destination)) {
+                                destination = cell.getPoint();
+                            }
                         }
                     }
                 }
@@ -35,9 +37,11 @@ public class StationDetector extends Sensor{
 
             for (Cell[] row : view) {
                 for (Cell cell : row) {
-                    if (cell instanceof RecyclingStation) {
-                        if (agent.getPosition().distanceTo(cell.getPoint()) < agent.getPosition().distanceTo(destination)) {
-                            destination = cell.getPoint();
+                    if (agent.exploredMap.isCellAllowed(agent, cell)) {
+                        if (cell instanceof RecyclingStation) {
+                            if (agent.getPosition().distanceTo(cell.getPoint()) < agent.getPosition().distanceTo(destination)) {
+                                destination = cell.getPoint();
+                            }
                         }
                     }
                 }

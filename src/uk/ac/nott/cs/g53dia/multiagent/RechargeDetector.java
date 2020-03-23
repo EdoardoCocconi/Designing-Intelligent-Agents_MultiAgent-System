@@ -9,7 +9,7 @@ import static sun.security.pkcs11.wrapper.PKCS11Constants.FALSE;
 import static sun.security.pkcs11.wrapper.PKCS11Constants.TRUE;
 
 
-public class RechargeDetector extends Sensor{
+public class RechargeDetector extends Sensor {
 
 
     public RechargeDetector(DemoLitterAgent agent) {
@@ -17,7 +17,7 @@ public class RechargeDetector extends Sensor{
     }
 
 
-    public Point readSensor(ExploredMap exploredMap){
+    public Point readSensor(ExploredMap exploredMap) {
 
         Point position = agent.getPosition();
         Point destination = agent.errorDestination;
@@ -29,9 +29,11 @@ public class RechargeDetector extends Sensor{
 
             for (Cell[] row : view) {
                 for (Cell cell : row) {
-                    if (cell instanceof RechargePoint) {
-                        if (agent.getPosition().distanceTo(cell.getPoint()) < agent.getPosition().distanceTo(destination)) {
-                            destination = cell.getPoint();
+                    if (agent.exploredMap.isCellAllowed(agent, cell)) {
+                        if (cell instanceof RechargePoint) {
+                            if (agent.getPosition().distanceTo(cell.getPoint()) < agent.getPosition().distanceTo(destination)) {
+                                destination = cell.getPoint();
+                            }
                         }
                     }
                 }
@@ -44,7 +46,6 @@ public class RechargeDetector extends Sensor{
         return destination;
 
     }
-
 
 
     public boolean isRechargeInRange(ExploredMap exploredMap, long timestep) {
@@ -76,7 +77,6 @@ public class RechargeDetector extends Sensor{
 
         return recharge;
     }
-
 
 
 }

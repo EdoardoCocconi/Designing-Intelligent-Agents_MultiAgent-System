@@ -16,14 +16,16 @@ public class LitterDetector extends Sensor {
 
 
     public boolean betterBin(Cell cell, Point previousDestination, int previousScore, double currentCapacity) {
-        int previousDistance = agent.getPosition().distanceTo(previousDestination);
-        int distance = agent.getPosition().distanceTo(cell.getPoint());
-        LitterBin litterBin = (LitterBin) cell;
-        if (litterBin.getTask() != null) {
-            int score = litterBin.getTask().getRemaining();
-            if (score < currentCapacity) {
-                if (score / (distance + 1) > previousScore / (previousDistance + 1))
-                    return TRUE;
+        if(agent.exploredMap.isCellAllowed(agent, cell)) {
+            int previousDistance = agent.getPosition().distanceTo(previousDestination);
+            int distance = agent.getPosition().distanceTo(cell.getPoint());
+            LitterBin litterBin = (LitterBin) cell;
+            if (litterBin.getTask() != null) {
+                int score = litterBin.getTask().getRemaining();
+                if (score < currentCapacity) {
+                    if (score / (distance + 1) > previousScore / (previousDistance + 1))
+                        return TRUE;
+                }
             }
         }
         return FALSE;
