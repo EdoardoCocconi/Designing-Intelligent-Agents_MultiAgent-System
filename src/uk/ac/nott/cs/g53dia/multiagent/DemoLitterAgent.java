@@ -3,8 +3,6 @@ package uk.ac.nott.cs.g53dia.multiagent;
 import uk.ac.nott.cs.g53dia.multiagent.Behaviour.BehaviourType;
 import uk.ac.nott.cs.g53dia.multilibrary.*;
 
-import java.util.Random;
-
 import static java.lang.Math.abs;
 
 /**
@@ -38,8 +36,8 @@ public class DemoLitterAgent extends LitterAgent {
     public Point agentDestination;
     final Point origin = new Point(0, 0);
 
-    public BehaviourType previousState;
-    public BehaviourType nextState;
+    public BehaviourType previousBehaviour;
+    public BehaviourType nextBehaviour;
 
 
     public DemoLitterAgent(int agentID) {
@@ -86,21 +84,20 @@ public class DemoLitterAgent extends LitterAgent {
 
     private BehaviourType sense(ExploredMap exploredMap, long timestep) {
 
-        double maxCapacity = LitterAgent.MAX_LITTER;
         double currentLitter = this.getLitterLevel();
-        BehaviourType nextState;
+        BehaviourType nextBehaviour;
 
         if (rechargeDetector.isRechargeInRange(exploredMap, timestep)) {
-            nextState = BehaviourType.BATTERY_BEHAVIOUR;
-        } else if (currentLitter != maxCapacity && (!litterDetector.readSensor(exploredMap).equals(errorDestination))) {
-            nextState = BehaviourType.COLLECT_BEHAVIOUR;
+            nextBehaviour = BehaviourType.BATTERY_BEHAVIOUR;
+        } else if (currentLitter != (double) LitterAgent.MAX_LITTER && (!litterDetector.readSensor(exploredMap).equals(errorDestination))) {
+            nextBehaviour = BehaviourType.COLLECT_BEHAVIOUR;
         } else if (currentLitter != 0 && !stationDetector.readSensor(exploredMap).equals(errorDestination)) {
-            nextState = BehaviourType.DUMP_BEHAVIOUR;
+            nextBehaviour = BehaviourType.DUMP_BEHAVIOUR;
         } else {
-            nextState = BehaviourType.EXPLORE_BEHAVIOUR;
+            nextBehaviour = BehaviourType.EXPLORE_BEHAVIOUR;
         }
 
-        return nextState;
+        return nextBehaviour;
 
     }
 
@@ -135,13 +132,13 @@ public class DemoLitterAgent extends LitterAgent {
 
 
         exploredMap.updateMap(view);
-        previousState = nextState;
-        nextState = sense(exploredMap, timestep);
+        previousBehaviour = nextBehaviour;
+        nextBehaviour = sense(exploredMap, timestep);
         if (abs(this.getPosition().getX()) > 200 || abs(this.getPosition().getY()) > 200) {
             System.out.println(this.getPosition());
-            System.out.println(nextState);
+            System.out.println(nextBehaviour);
         }
-        return act(nextState);
+        return act(nextBehaviour);
 
     }
 }
