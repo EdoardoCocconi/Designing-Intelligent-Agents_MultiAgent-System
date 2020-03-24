@@ -45,7 +45,7 @@ public class RechargeDetector extends Sensor {
         double maxCharge = LitterAgent.MAX_CHARGE;
 
 
-        if (agent.agentDestination != null) {
+    if (agent.agentDestination != null) {
 
             if (charge <= distance + 2) {
                 recharge = TRUE;

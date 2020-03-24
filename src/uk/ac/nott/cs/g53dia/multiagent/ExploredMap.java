@@ -14,15 +14,29 @@ public class ExploredMap {
 
     public Map<Point, Cell> map = new HashMap<Point, Cell>();
     public ArrayList<Point> rechargePoints = new ArrayList<Point>();
-
+    public ArrayList<Cell> wasteCells = new ArrayList<Cell>();
+    public ArrayList<Cell> recyclingCells = new ArrayList<Cell>();
+    public ArrayList<Point> wasteStationPoints = new ArrayList<Point>();
+    public ArrayList<Point> recyclingStationPoints = new ArrayList<Point>();
 
     public void updateMap(Cell[][] view) {
 
         for (Cell[] row : view) {
             for (Cell cell : row) {
-                this.map.put(cell.getPoint(), cell);
-                if (cell instanceof RechargePoint && !rechargePoints.contains(cell.getPoint()))
-                    rechargePoints.add(cell.getPoint());
+                if (isCellAllowed(cell)) {
+                    this.map.put(cell.getPoint(), cell);
+                    if (cell instanceof RechargePoint && !rechargePoints.contains(cell.getPoint())) {
+                        rechargePoints.add(cell.getPoint());
+                    } else if (cell instanceof WasteBin && ((WasteBin) cell).getTask() != null && !wasteCells.contains(cell)) {
+                        wasteCells.add(cell);
+                    } else if (cell instanceof RecyclingBin && ((RecyclingBin) cell).getTask() != null && !recyclingCells.contains(cell)) {
+                        recyclingCells.add(cell);
+                    } else if (cell instanceof WasteStation && !wasteStationPoints.contains(cell.getPoint())) {
+                        wasteStationPoints.add(cell.getPoint());
+                    } else if (cell instanceof RecyclingStation && !recyclingStationPoints.contains(cell.getPoint())) {
+                        recyclingStationPoints.add(cell.getPoint());
+                    }
+                }
             }
         }
 
@@ -42,7 +56,7 @@ public class ExploredMap {
     }
 
 
-    public boolean isCellAllowed(DemoLitterAgent agent, Cell cell) {
+    public boolean isCellAllowed(Cell cell) {
         if (cell != null) {
             if (cell.getPoint().getX() <= 200 && cell.getPoint().getX() >= -200) {
                 if (cell.getPoint().getY() <= 200 && cell.getPoint().getY() >= -200)

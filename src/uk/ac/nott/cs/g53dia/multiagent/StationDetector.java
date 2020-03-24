@@ -13,43 +13,35 @@ public class StationDetector extends Sensor {
 
     public Point readSensor(ExploredMap exploredMap) {
 
-        int size = 30;
+        int maxDistance = 30;
         Point position = agent.getPosition();
-        Cell[][] view = exploredMap.getView(position, size);
-        Point destination = agent.errorDestination;
+        Point closestStation = agent.errorDestination;
+        int distanceToStation = position.distanceTo(closestStation);
 
         if (agent.getWasteLevel() != 0) {
 
-            for (Cell[] row : view) {
-                for (Cell cell : row) {
-                    if (agent.exploredMap.isCellAllowed(agent, cell)) {
-                        if (cell instanceof WasteStation) {
-                            if (agent.getPosition().distanceTo(cell.getPoint()) < agent.getPosition().distanceTo(destination)) {
-                                destination = cell.getPoint();
-                            }
-                        }
-                    }
+            for (Point wasteStation : agent.exploredMap.wasteStationPoints) {
+                if (position.distanceTo(wasteStation) < distanceToStation) {
+                    distanceToStation = position.distanceTo(wasteStation);
+                    closestStation = wasteStation;
                 }
             }
 
         } else {
 
-
-            for (Cell[] row : view) {
-                for (Cell cell : row) {
-                    if (agent.exploredMap.isCellAllowed(agent, cell)) {
-                        if (cell instanceof RecyclingStation) {
-                            if (agent.getPosition().distanceTo(cell.getPoint()) < agent.getPosition().distanceTo(destination)) {
-                                destination = cell.getPoint();
-                            }
-                        }
-                    }
+            for (Point recyclingStation : agent.exploredMap.recyclingStationPoints) {
+                if (position.distanceTo(recyclingStation) < distanceToStation) {
+                    distanceToStation = position.distanceTo(recyclingStation);
+                    closestStation = recyclingStation;
                 }
             }
 
         }
 
-        return destination;
+        if (distanceToStation > maxDistance)
+            closestStation = agent.errorDestination;
+
+        return closestStation;
 
     }
 
