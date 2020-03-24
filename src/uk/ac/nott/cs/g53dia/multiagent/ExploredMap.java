@@ -2,6 +2,7 @@ package uk.ac.nott.cs.g53dia.multiagent;
 
 import uk.ac.nott.cs.g53dia.multilibrary.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import static sun.security.pkcs11.wrapper.PKCS11Constants.TRUE;
 public class ExploredMap {
 
     public Map<Point, Cell> map = new HashMap<Point, Cell>();
+    public ArrayList<Point> rechargePoints = new ArrayList<Point>();
 
 
     public void updateMap(Cell[][] view) {
@@ -19,6 +21,8 @@ public class ExploredMap {
         for (Cell[] row : view) {
             for (Cell cell : row) {
                 this.map.put(cell.getPoint(), cell);
+                if (cell instanceof RechargePoint && !rechargePoints.contains(cell.getPoint()))
+                    rechargePoints.add(cell.getPoint());
             }
         }
 

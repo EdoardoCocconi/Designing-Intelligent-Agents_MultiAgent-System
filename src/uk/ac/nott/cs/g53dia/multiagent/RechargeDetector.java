@@ -1,9 +1,7 @@
 package uk.ac.nott.cs.g53dia.multiagent;
 
-import uk.ac.nott.cs.g53dia.multilibrary.Cell;
 import uk.ac.nott.cs.g53dia.multilibrary.LitterAgent;
 import uk.ac.nott.cs.g53dia.multilibrary.Point;
-import uk.ac.nott.cs.g53dia.multilibrary.RechargePoint;
 
 import static sun.security.pkcs11.wrapper.PKCS11Constants.FALSE;
 import static sun.security.pkcs11.wrapper.PKCS11Constants.TRUE;
@@ -20,30 +18,19 @@ public class RechargeDetector extends Sensor {
     public Point readSensor(ExploredMap exploredMap) {
 
         Point position = agent.getPosition();
-        Point destination = agent.errorDestination;
-        int size = 30;
+        Point closestRecharge = agent.exploredMap.rechargePoints.get(0);
+        int distanceToRecharge = position.distanceTo(closestRecharge);
 
-        while (destination.equals(agent.errorDestination)) {
 
-            Cell[][] view = exploredMap.getView(position, size);
-
-            for (Cell[] row : view) {
-                for (Cell cell : row) {
-                    if (agent.exploredMap.isCellAllowed(agent, cell)) {
-                        if (cell instanceof RechargePoint) {
-                            if (agent.getPosition().distanceTo(cell.getPoint()) < agent.getPosition().distanceTo(destination)) {
-                                destination = cell.getPoint();
-                            }
-                        }
-                    }
-                }
+        for (Point rechargePoint : agent.exploredMap.rechargePoints) {
+            if (position.distanceTo(rechargePoint) < distanceToRecharge) {
+                distanceToRecharge = position.distanceTo(rechargePoint);
+                closestRecharge = rechargePoint;
             }
-
-            size += 10;
-
         }
 
-        return destination;
+
+        return closestRecharge;
 
     }
 
@@ -51,9 +38,8 @@ public class RechargeDetector extends Sensor {
     public boolean isRechargeInRange(ExploredMap exploredMap, long timestep) {
 
         boolean recharge = FALSE;
-        Point destination;
-        destination = agent.rechargeDetector.readSensor(exploredMap);
-        int distance = agent.getPosition().distanceTo(destination);
+        Point closestRecharge = agent.rechargeDetector.readSensor(exploredMap);
+        int distance = agent.getPosition().distanceTo(closestRecharge);
 
         double charge = agent.getChargeLevel();
         double maxCharge = LitterAgent.MAX_CHARGE;
