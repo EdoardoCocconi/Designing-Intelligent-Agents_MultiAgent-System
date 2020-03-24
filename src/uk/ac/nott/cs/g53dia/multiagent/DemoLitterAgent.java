@@ -130,13 +130,12 @@ public class DemoLitterAgent extends LitterAgent {
 
 //        System.out.println("Agent " + agentID + this.getPosition() + " score: " + this.getScore() + " map size: " + exploredMap.map.size());
 
-
         exploredMap.updateMap(view);
         previousBehaviour = nextBehaviour;
         nextBehaviour = sense(exploredMap, timestep);
         if (abs(this.getPosition().getX()) > 200 || abs(this.getPosition().getY()) > 200) {
             System.out.println(this.getPosition());
-            System.out.println(nextBehaviour);
+            System.out.println("Agent: " + agentID + " " + nextBehaviour);
         }
         return act(nextBehaviour);
 
