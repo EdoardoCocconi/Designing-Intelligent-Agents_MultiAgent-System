@@ -5,17 +5,7 @@ import uk.ac.nott.cs.g53dia.multilibrary.*;
 
 import static java.lang.Math.abs;
 
-/**
- * A simple example LitterAgent
- *
- * @author Julian Zappala
- */
-/*
- * Copyright (c) 2011 Julian Zappala
- *
- * See the file "license.terms" for information on usage and redistribution of
- * this file, and for a DISCLAIMER OF ALL WARRANTIES.
- */
+
 public class DemoLitterAgent extends LitterAgent {
 
     final int agentID;

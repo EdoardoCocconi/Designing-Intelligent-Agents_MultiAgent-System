@@ -5,8 +5,6 @@ import uk.ac.nott.cs.g53dia.multilibrary.*;
 
 public class ExploreBehaviour extends Behaviour {
 
-    private Point explorationDestination;
-
 
     public ExploreBehaviour(DemoLitterAgent agent) {
         super(agent);
@@ -17,13 +15,13 @@ public class ExploreBehaviour extends Behaviour {
 
         if (agent.previousBehaviour != BehaviourType.EXPLORE_BEHAVIOUR) {
             if (agent.getPosition().distanceTo(agent.origin) > 190) {
-                explorationDestination = agent.origin;
+                agent.agentDestination = agent.origin;
             } else {
-                explorationDestination = agent.errorDestination;
+                agent.agentDestination = agent.errorDestination;
             }
         }
 
-        return new MoveTowardsAction(explorationDestination);
+        return new MoveTowardsAction(agent.agentDestination);
 
     }
 

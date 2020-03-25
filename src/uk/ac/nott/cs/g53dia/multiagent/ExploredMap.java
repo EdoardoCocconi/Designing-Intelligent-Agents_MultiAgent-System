@@ -13,11 +13,11 @@ import static sun.security.pkcs11.wrapper.PKCS11Constants.TRUE;
 
 public class ExploredMap {
 
-    public ArrayList<Point> rechargePoints = new ArrayList<Point>();
-    public Map<Point, Cell> wasteCells = new HashMap<Point, Cell>();
-    public Map<Point, Cell> recyclingCells = new HashMap<Point, Cell>();
-    public ArrayList<Point> wasteStationPoints = new ArrayList<Point>();
-    public ArrayList<Point> recyclingStationPoints = new ArrayList<Point>();
+    public ArrayList<Point> rechargePoints = new ArrayList<>();
+    public Map<Point, Cell> wasteCells = new HashMap<>();
+    public Map<Point, Cell> recyclingCells = new HashMap<>();
+    public ArrayList<Point> wasteStationPoints = new ArrayList<>();
+    public ArrayList<Point> recyclingStationPoints = new ArrayList<>();
     final private int mapSize = 200;
 
 

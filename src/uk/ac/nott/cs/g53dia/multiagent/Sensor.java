@@ -1,6 +1,5 @@
 package uk.ac.nott.cs.g53dia.multiagent;
 
-import uk.ac.nott.cs.g53dia.multilibrary.LitterAgent;
 import uk.ac.nott.cs.g53dia.multilibrary.Point;
 
 

@@ -17,7 +17,7 @@ public class LitterDetector extends Sensor {
     }
 
 
-    public boolean betterBin(Cell cell, Point previousDestination, int previousScore, double currentCapacity, int viewField) {
+    public boolean bestBin(Cell cell, Point previousDestination, int previousScore, double currentCapacity, int viewField) {
         int previousDistance = agent.getPosition().distanceTo(previousDestination);
         int distance = agent.getPosition().distanceTo(cell.getPoint());
         if (distance <= viewField) {
@@ -44,51 +44,51 @@ public class LitterDetector extends Sensor {
         double capacityPercentage = currentCapacity / maxCapacity;
         int viewField = (int) ceil(30 * capacityPercentage);
 
-        Point destination = agent.errorDestination;
+        Point bestBin = agent.errorDestination;
         int score = 0;
 
         if (currentWaste != 0 && currentRecycling == 0) {
             for (Map.Entry<Point, Cell> entry : agent.exploredMap.wasteCells.entrySet()) {
                 Cell wasteBin = entry.getValue();
-                if (betterBin(wasteBin, destination, score, currentCapacity, viewField)) {
+                if (bestBin(wasteBin, bestBin, score, currentCapacity, viewField)) {
                     LitterBin litterBin = (LitterBin) wasteBin;
                     score = litterBin.getTask().getRemaining();
-                    destination = wasteBin.getPoint();
+                    bestBin = wasteBin.getPoint();
                 }
             }
         } else if (currentWaste == 0 && currentRecycling != 0) {
             for (Map.Entry<Point, Cell> entry : agent.exploredMap.recyclingCells.entrySet()) {
                 Cell recyclingBin = entry.getValue();
-                if (betterBin(recyclingBin, destination, score, currentCapacity, viewField)) {
+                if (bestBin(recyclingBin, bestBin, score, currentCapacity, viewField)) {
                     LitterBin litterBin = (LitterBin) recyclingBin;
                     score = litterBin.getTask().getRemaining();
-                    destination = recyclingBin.getPoint();
+                    bestBin = recyclingBin.getPoint();
                 }
             }
         } else {
 
             for (Map.Entry<Point, Cell> entry : agent.exploredMap.wasteCells.entrySet()) {
                 Cell wasteBin = entry.getValue();
-                if (betterBin(wasteBin, destination, score, currentCapacity, viewField)) {
+                if (bestBin(wasteBin, bestBin, score, currentCapacity, viewField)) {
                     LitterBin litterBin = (LitterBin) wasteBin;
                     score = litterBin.getTask().getRemaining();
-                    destination = wasteBin.getPoint();
+                    bestBin = wasteBin.getPoint();
                 }
             }
 
             for (Map.Entry<Point, Cell> entry : agent.exploredMap.recyclingCells.entrySet()) {
                 Cell recyclingBin = entry.getValue();
-                if (betterBin(recyclingBin, destination, score, currentCapacity, viewField)) {
+                if (bestBin(recyclingBin, bestBin, score, currentCapacity, viewField)) {
                     LitterBin litterBin = (LitterBin) recyclingBin;
                     score = litterBin.getTask().getRemaining();
-                    destination = recyclingBin.getPoint();
+                    bestBin = recyclingBin.getPoint();
                 }
 
             }
 
         }
 
-        return destination;
+        return bestBin;
 
     }
 
