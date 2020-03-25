@@ -48,7 +48,7 @@ public class LitterDetector extends Sensor {
         int score = 0;
 
         if (currentWaste != 0 && currentRecycling == 0) {
-            for (Map.Entry<Point, Cell> entry : agent.exploredMap.wasteCells.entrySet()) {
+            for (Map.Entry<Point, Cell> entry : agent.fleetControlCentre.exploredMap.wasteCells.entrySet()) {
                 Cell wasteBin = entry.getValue();
                 if (bestBin(wasteBin, bestBin, score, currentCapacity, viewField)) {
                     LitterBin litterBin = (LitterBin) wasteBin;
@@ -57,7 +57,7 @@ public class LitterDetector extends Sensor {
                 }
             }
         } else if (currentWaste == 0 && currentRecycling != 0) {
-            for (Map.Entry<Point, Cell> entry : agent.exploredMap.recyclingCells.entrySet()) {
+            for (Map.Entry<Point, Cell> entry : agent.fleetControlCentre.exploredMap.recyclingCells.entrySet()) {
                 Cell recyclingBin = entry.getValue();
                 if (bestBin(recyclingBin, bestBin, score, currentCapacity, viewField)) {
                     LitterBin litterBin = (LitterBin) recyclingBin;
@@ -67,7 +67,7 @@ public class LitterDetector extends Sensor {
             }
         } else {
 
-            for (Map.Entry<Point, Cell> entry : agent.exploredMap.wasteCells.entrySet()) {
+            for (Map.Entry<Point, Cell> entry : agent.fleetControlCentre.exploredMap.wasteCells.entrySet()) {
                 Cell wasteBin = entry.getValue();
                 if (bestBin(wasteBin, bestBin, score, currentCapacity, viewField)) {
                     LitterBin litterBin = (LitterBin) wasteBin;
@@ -76,7 +76,7 @@ public class LitterDetector extends Sensor {
                 }
             }
 
-            for (Map.Entry<Point, Cell> entry : agent.exploredMap.recyclingCells.entrySet()) {
+            for (Map.Entry<Point, Cell> entry : agent.fleetControlCentre.exploredMap.recyclingCells.entrySet()) {
                 Cell recyclingBin = entry.getValue();
                 if (bestBin(recyclingBin, bestBin, score, currentCapacity, viewField)) {
                     LitterBin litterBin = (LitterBin) recyclingBin;

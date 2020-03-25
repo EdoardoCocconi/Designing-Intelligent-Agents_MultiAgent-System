@@ -35,9 +35,9 @@ public class ExploredMap {
         for (Cell[] row : view) {
             for (Cell cell : row) {
                 if (isCellAllowed(cell)) {
-                    if (cell instanceof RechargePoint && !rechargePoints.contains(cell.getPoint())) {
+                    if (cell instanceof RechargePoint) {
                         rechargePoints.add(cell.getPoint());
-                    } else if (cell instanceof WasteBin) {
+                    } else if (cell instanceof WasteBin && !wasteCells.containsKey(cell.getPoint()) && ((WasteBin) cell).getTask() != null) {
                         wasteCells.put(cell.getPoint(), cell);
                     } else if (cell instanceof RecyclingBin) {
                         recyclingCells.put(cell.getPoint(), cell);

@@ -8,6 +8,7 @@ import static java.lang.Math.abs;
 
 public class DemoLitterAgent extends LitterAgent {
 
+    final FleetControlCentre fleetControlCentre;
     final int agentID;
     Point errorDestination;
     final int errorDestinationX;
@@ -21,7 +22,6 @@ public class DemoLitterAgent extends LitterAgent {
     RechargeDetector rechargeDetector;
     StationDetector stationDetector;
 
-    ExploredMap exploredMap;
     final int finalTime = 10000;
     public Point agentDestination;
     final Point origin = new Point(0, 0);
@@ -30,8 +30,9 @@ public class DemoLitterAgent extends LitterAgent {
     public BehaviourType nextBehaviour;
 
 
-    public DemoLitterAgent(int agentID) {
+    public DemoLitterAgent(FleetControlCentre fleetControlCentre, int agentID) {
 
+        this.fleetControlCentre = fleetControlCentre;
         this.agentID = agentID;
 
         errorDestination = choseErrorDestination();
@@ -45,8 +46,6 @@ public class DemoLitterAgent extends LitterAgent {
         litterDetector = new LitterDetector(this);
         rechargeDetector = new RechargeDetector(this);
         stationDetector = new StationDetector(this);
-
-        exploredMap = new ExploredMap();
 
     }
 
@@ -98,16 +97,16 @@ public class DemoLitterAgent extends LitterAgent {
         switch (nextState) {
 
             case BATTERY_BEHAVIOUR:
-                resultAction = rechargeBehaviour.act(exploredMap);
+                resultAction = rechargeBehaviour.act(fleetControlCentre.exploredMap);
                 break;
             case EXPLORE_BEHAVIOUR:
-                resultAction = exploreBehaviour.act(exploredMap);
+                resultAction = exploreBehaviour.act(fleetControlCentre.exploredMap);
                 break;
             case COLLECT_BEHAVIOUR:
-                resultAction = collectBehaviour.act(exploredMap);
+                resultAction = collectBehaviour.act(fleetControlCentre.exploredMap);
                 break;
             case DUMP_BEHAVIOUR:
-                resultAction = disposeBehaviour.act(exploredMap);
+                resultAction = disposeBehaviour.act(fleetControlCentre.exploredMap);
                 break;
         }
 
@@ -120,9 +119,9 @@ public class DemoLitterAgent extends LitterAgent {
 
 //        System.out.println("Agent " + agentID + this.getPosition() + " score: " + this.getScore() + " map size: " + exploredMap.map.size());
 
-        exploredMap.updateMap(view);
+        fleetControlCentre.exploredMap.updateMap(view);
         previousBehaviour = nextBehaviour;
-        nextBehaviour = sense(exploredMap, timestep);
+        nextBehaviour = sense(fleetControlCentre.exploredMap, timestep);
 
 //        if (timestep % 100 == 0)
 //            System.out.println(timestep);

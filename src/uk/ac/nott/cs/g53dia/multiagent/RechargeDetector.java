@@ -18,11 +18,11 @@ public class RechargeDetector extends Sensor {
     public Point readSensor(ExploredMap exploredMap) {
 
         Point position = agent.getPosition();
-        Point closestRecharge = agent.exploredMap.rechargePoints.get(0);
+        Point closestRecharge = agent.fleetControlCentre.exploredMap.rechargePoints.get(0);
         int distanceToRecharge = position.distanceTo(closestRecharge);
 
 
-        for (Point rechargePoint : agent.exploredMap.rechargePoints) {
+        for (Point rechargePoint : agent.fleetControlCentre.exploredMap.rechargePoints) {
             if (position.distanceTo(rechargePoint) < distanceToRecharge) {
                 distanceToRecharge = position.distanceTo(rechargePoint);
                 closestRecharge = rechargePoint;
