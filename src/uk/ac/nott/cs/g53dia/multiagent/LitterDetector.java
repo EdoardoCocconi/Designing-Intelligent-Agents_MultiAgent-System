@@ -2,6 +2,8 @@ package uk.ac.nott.cs.g53dia.multiagent;
 
 import uk.ac.nott.cs.g53dia.multilibrary.*;
 
+import java.util.Map;
+
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.Math.ceil;
@@ -50,7 +52,8 @@ public class LitterDetector extends Sensor {
         int score = 0;
 
         if (currentWaste != 0 && currentRecycling == 0) {
-            for (Cell wasteBin : agent.exploredMap.wasteCells) {
+            for (Map.Entry<Point, Cell> entry : agent.exploredMap.wasteCells.entrySet()) {
+                Cell wasteBin = entry.getValue();
                 if (betterBin(wasteBin, destination, score, currentCapacity, viewField)) {
                     LitterBin litterBin = (LitterBin) wasteBin;
                     score = litterBin.getTask().getRemaining();
@@ -58,7 +61,8 @@ public class LitterDetector extends Sensor {
                 }
             }
         } else if (currentWaste == 0 && currentRecycling != 0) {
-            for (Cell recyclingBin : agent.exploredMap.recyclingCells) {
+            for (Map.Entry<Point, Cell> entry : agent.exploredMap.recyclingCells.entrySet()) {
+                Cell recyclingBin = entry.getValue();
                 if (betterBin(recyclingBin, destination, score, currentCapacity, viewField)) {
                     LitterBin litterBin = (LitterBin) recyclingBin;
                     score = litterBin.getTask().getRemaining();
@@ -67,7 +71,8 @@ public class LitterDetector extends Sensor {
             }
         } else {
 
-            for (Cell wasteBin : agent.exploredMap.wasteCells) {
+            for (Map.Entry<Point, Cell> entry : agent.exploredMap.wasteCells.entrySet()) {
+                Cell wasteBin = entry.getValue();
                 if (betterBin(wasteBin, destination, score, currentCapacity, viewField)) {
                     LitterBin litterBin = (LitterBin) wasteBin;
                     score = litterBin.getTask().getRemaining();
@@ -75,7 +80,8 @@ public class LitterDetector extends Sensor {
                 }
             }
 
-            for (Cell recyclingBin : agent.exploredMap.recyclingCells) {
+            for (Map.Entry<Point, Cell> entry : agent.exploredMap.recyclingCells.entrySet()) {
+                Cell recyclingBin = entry.getValue();
                 if (betterBin(recyclingBin, destination, score, currentCapacity, viewField)) {
                     LitterBin litterBin = (LitterBin) recyclingBin;
                     score = litterBin.getTask().getRemaining();

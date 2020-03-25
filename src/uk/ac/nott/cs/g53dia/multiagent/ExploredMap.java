@@ -15,8 +15,8 @@ public class ExploredMap {
 
     public Map<Point, Cell> map = new HashMap<Point, Cell>();
     public ArrayList<Point> rechargePoints = new ArrayList<Point>();
-    public ArrayList<Cell> wasteCells = new ArrayList<Cell>();
-    public ArrayList<Cell> recyclingCells = new ArrayList<Cell>();
+    public Map<Point, Cell> wasteCells = new HashMap<Point, Cell>();
+    public Map<Point, Cell> recyclingCells = new HashMap<Point, Cell>();
     public ArrayList<Point> wasteStationPoints = new ArrayList<Point>();
     public ArrayList<Point> recyclingStationPoints = new ArrayList<Point>();
     final private int mapSize = 200;
@@ -36,13 +36,13 @@ public class ExploredMap {
         for (Cell[] row : view) {
             for (Cell cell : row) {
                 if (isCellAllowed(cell)) {
-                    this.map.put(cell.getPoint(), cell);
+//                    this.map.put(cell.getPoint(), cell);
                     if (cell instanceof RechargePoint && !rechargePoints.contains(cell.getPoint())) {
                         rechargePoints.add(cell.getPoint());
-                    } else if (cell instanceof WasteBin && ((WasteBin) cell).getTask() != null && !wasteCells.contains(cell)) {
-                        wasteCells.add(cell);
-                    } else if (cell instanceof RecyclingBin && ((RecyclingBin) cell).getTask() != null && !recyclingCells.contains(cell)) {
-                        recyclingCells.add(cell);
+                    } else if (cell instanceof WasteBin) {
+                        wasteCells.put(cell.getPoint(), cell);
+                    } else if (cell instanceof RecyclingBin) {
+                        recyclingCells.put(cell.getPoint(), cell);
                     } else if (cell instanceof WasteStation && !wasteStationPoints.contains(cell.getPoint())) {
                         wasteStationPoints.add(cell.getPoint());
                     } else if (cell instanceof RecyclingStation && !recyclingStationPoints.contains(cell.getPoint())) {

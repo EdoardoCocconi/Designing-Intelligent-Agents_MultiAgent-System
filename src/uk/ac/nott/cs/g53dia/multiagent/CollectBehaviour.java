@@ -16,7 +16,12 @@ public class CollectBehaviour extends Behaviour {
          agent.agentDestination = agent.litterDetector.readSensor(exploredMap);
 
         if (agent.getPosition().equals(agent.agentDestination)) {
-            LitterBin currentBin = (LitterBin) exploredMap.map.get(agent.agentDestination);
+            LitterBin currentBin;
+            if (agent.exploredMap.wasteCells.containsKey(agent.agentDestination)) {
+                currentBin = (LitterBin) exploredMap.wasteCells.get(agent.agentDestination);
+            } else {
+                currentBin = (LitterBin) exploredMap.recyclingCells.get(agent.agentDestination);
+            }
             return new LoadAction(currentBin.getTask());
         }
 
