@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.lang.Math.abs;
 import static sun.security.pkcs11.wrapper.PKCS11Constants.FALSE;
 import static sun.security.pkcs11.wrapper.PKCS11Constants.TRUE;
 
@@ -18,6 +19,17 @@ public class ExploredMap {
     public ArrayList<Cell> recyclingCells = new ArrayList<Cell>();
     public ArrayList<Point> wasteStationPoints = new ArrayList<Point>();
     public ArrayList<Point> recyclingStationPoints = new ArrayList<Point>();
+    final private int mapSize = 200;
+
+
+    public boolean isCellAllowed(Cell cell) {
+        if (cell != null) {
+            if (abs(cell.getPoint().getX()) <= mapSize && abs(cell.getPoint().getY()) <= mapSize)
+                return TRUE;
+        }
+        return FALSE;
+    }
+
 
     public void updateMap(Cell[][] view) {
 
@@ -53,17 +65,6 @@ public class ExploredMap {
             }
         }
         return res;
-    }
-
-
-    public boolean isCellAllowed(Cell cell) {
-        if (cell != null) {
-            if (cell.getPoint().getX() <= 200 && cell.getPoint().getX() >= -200) {
-                if (cell.getPoint().getY() <= 200 && cell.getPoint().getY() >= -200)
-                    return TRUE;
-            }
-        }
-        return FALSE;
     }
 
 
