@@ -35,7 +35,7 @@ public class DemoLitterAgent extends LitterAgent {
         this.fleetControlCentre = fleetControlCentre;
         this.agentID = agentID;
 
-        errorDestination = choseErrorDestination();
+        errorDestination = fleetControlCentre.choseErrorDestination(agentID);
         errorDestinationX = errorDestination.getX();
         errorDestinationY = errorDestination.getY();
 
@@ -47,27 +47,6 @@ public class DemoLitterAgent extends LitterAgent {
         rechargeDetector = new RechargeDetector(this);
         stationDetector = new StationDetector(this);
 
-    }
-
-
-    private Point choseErrorDestination() {
-        Point errorDestination = null;
-        switch (this.agentID) {
-            case 0:
-                errorDestination = new Point(99999999, 99999999);
-                break;
-            case 1:
-                errorDestination = new Point(-99999999, 99999999);
-                break;
-            case 2:
-                errorDestination = new Point(-99999999, -99999999);
-                break;
-            case 3:
-                errorDestination = new Point(99999999, -99999999);
-                break;
-        }
-
-        return errorDestination;
     }
 
 
