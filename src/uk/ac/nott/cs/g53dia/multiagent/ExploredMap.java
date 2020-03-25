@@ -13,7 +13,6 @@ import static sun.security.pkcs11.wrapper.PKCS11Constants.TRUE;
 
 public class ExploredMap {
 
-    public Map<Point, Cell> map = new HashMap<Point, Cell>();
     public ArrayList<Point> rechargePoints = new ArrayList<Point>();
     public Map<Point, Cell> wasteCells = new HashMap<Point, Cell>();
     public Map<Point, Cell> recyclingCells = new HashMap<Point, Cell>();
@@ -36,7 +35,6 @@ public class ExploredMap {
         for (Cell[] row : view) {
             for (Cell cell : row) {
                 if (isCellAllowed(cell)) {
-//                    this.map.put(cell.getPoint(), cell);
                     if (cell instanceof RechargePoint && !rechargePoints.contains(cell.getPoint())) {
                         rechargePoints.add(cell.getPoint());
                     } else if (cell instanceof WasteBin) {
@@ -55,7 +53,7 @@ public class ExploredMap {
     }
 
 
-    public Cell[][] getView(Point pos, int size) {
+    public Cell[][] getView(Map<Point, Cell> map, Point pos, int size) {
         Cell[][] res = new Cell[size * 2 + 1][size * 2 + 1];
         for (int x = pos.getX() - size; x <= pos.getX() + size; x++) {
             for (int y = pos.getY() - size; y <= pos.getY() + size; y++) {
