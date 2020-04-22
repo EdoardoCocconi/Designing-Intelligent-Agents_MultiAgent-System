@@ -36,6 +36,8 @@ public class DemoLitterAgent extends LitterAgent {
         this.agentID = agentID;
 
         errorDestination = fleetControlCentre.choseErrorDestination(agentID);
+        agentDestination = errorDestination;
+        this.fleetControlCentre.destinationList.put(agentID, agentDestination);
         errorDestinationX = errorDestination.getX();
         errorDestinationY = errorDestination.getY();
 
@@ -96,11 +98,13 @@ public class DemoLitterAgent extends LitterAgent {
 
     public Action senseAndAct(Cell[][] view, long timestep) {
 
-//        System.out.println("Agent " + agentID + this.getPosition() + " score: " + this.getScore() + " map size: " + exploredMap.map.size());
-
+        fleetControlCentre.setCurrentAgentID(agentID);
         fleetControlCentre.exploredMap.updateMap(view);
         previousBehaviour = nextBehaviour;
         nextBehaviour = sense(fleetControlCentre.exploredMap, timestep);
+        fleetControlCentre.updateDestinationList(agentID, agentDestination);
+
+        // System.out.println("Agent " + agentID + this.getPosition() + " score: " + this.getScore() + " map size: " + exploredMap.map.size());
 
 //        if (timestep % 100 == 0)
 //            System.out.println(timestep);
