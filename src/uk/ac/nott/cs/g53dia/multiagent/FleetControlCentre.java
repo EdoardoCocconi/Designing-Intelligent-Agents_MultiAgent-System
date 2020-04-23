@@ -1,9 +1,13 @@
 package uk.ac.nott.cs.g53dia.multiagent;
 
+import uk.ac.nott.cs.g53dia.multilibrary.Cell;
 import uk.ac.nott.cs.g53dia.multilibrary.Point;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
 
 public class FleetControlCentre {
@@ -48,6 +52,20 @@ public class FleetControlCentre {
 
     public void setCurrentAgentID(int currentAgentID) {
         this.currentAgentID = currentAgentID;
+    }
+
+
+    public boolean isAlreadyOccupied (Cell cell) {
+
+        for (Map.Entry<Integer, Point> entry : destinationList.entrySet()) {
+            if (entry.getKey() != currentAgentID) {
+                if (entry.getValue() == cell.getPoint())
+                    return TRUE;
+            }
+        }
+
+        return FALSE;
+
     }
 
 
