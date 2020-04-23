@@ -15,7 +15,7 @@ public class ExploreBehaviour extends Behaviour {
 
     public Action act(ExploredMap exploredMap) {
 
-        if (agent.previousBehaviour != BehaviourType.EXPLORE_BEHAVIOUR || abs(agent.getPosition().getX()) > 199 || abs(agent.getPosition().getY()) > 199) {
+        if (agent.previousBehaviour != BehaviourType.EXPLORE_BEHAVIOUR || abs(agent.getPosition().getX()) >= 200 || abs(agent.getPosition().getY()) >= 200) {
             if (agent.getPosition().distanceTo(agent.origin) > 190) {
                 agent.agentDestination = agent.origin;
             } else {

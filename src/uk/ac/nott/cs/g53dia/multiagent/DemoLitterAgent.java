@@ -3,8 +3,6 @@ package uk.ac.nott.cs.g53dia.multiagent;
 import uk.ac.nott.cs.g53dia.multiagent.Behaviour.BehaviourType;
 import uk.ac.nott.cs.g53dia.multilibrary.*;
 
-import static java.lang.Math.abs;
-
 
 public class DemoLitterAgent extends LitterAgent {
 
@@ -109,10 +107,6 @@ public class DemoLitterAgent extends LitterAgent {
 //        if (timestep % 100 == 0)
 //            System.out.println(timestep);
 
-        if (abs(this.getPosition().getX()) > 200 || abs(this.getPosition().getY()) > 200) {
-            System.out.println(this.getPosition());
-            System.out.println("Agent: " + agentID + " " + nextBehaviour);
-        }
         return act(nextBehaviour);
 
     }
