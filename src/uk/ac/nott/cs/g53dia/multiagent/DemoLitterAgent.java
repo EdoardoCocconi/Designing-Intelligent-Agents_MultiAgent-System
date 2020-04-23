@@ -101,12 +101,6 @@ public class DemoLitterAgent extends LitterAgent {
         previousBehaviour = nextBehaviour;
         nextBehaviour = sense(fleetControlCentre.exploredMap, timestep);
         fleetControlCentre.updateDestinationList(agentID, agentDestination);
-
-        // System.out.println("Agent " + agentID + this.getPosition() + " score: " + this.getScore() + " map size: " + exploredMap.map.size());
-
-//        if (timestep % 100 == 0)
-//            System.out.println(timestep);
-
         return act(nextBehaviour);
 
     }

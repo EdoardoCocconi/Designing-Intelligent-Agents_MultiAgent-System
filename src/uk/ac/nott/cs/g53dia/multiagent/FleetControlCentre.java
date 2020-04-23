@@ -55,7 +55,7 @@ public class FleetControlCentre {
     }
 
 
-    public boolean isAlreadyOccupied (Cell cell) {
+    public boolean isAlreadyClaimed(Cell cell) {
 
         for (Map.Entry<Integer, Point> entry : destinationList.entrySet()) {
             if (entry.getKey() != currentAgentID) {

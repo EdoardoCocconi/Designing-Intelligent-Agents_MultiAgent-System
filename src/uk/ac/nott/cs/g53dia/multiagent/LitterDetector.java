@@ -18,7 +18,7 @@ public class LitterDetector extends Sensor {
 
 
     public boolean bestBin(Cell cell, Point previousDestination, int previousScore, double currentCapacity, int viewField) {
-        if(agent.fleetControlCentre.isAlreadyOccupied(cell))
+        if(agent.fleetControlCentre.isAlreadyClaimed(cell))
             return FALSE;
         int previousDistance = agent.getPosition().distanceTo(previousDestination);
         int distance = agent.getPosition().distanceTo(cell.getPoint());
