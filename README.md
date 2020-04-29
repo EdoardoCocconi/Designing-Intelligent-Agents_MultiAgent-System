@@ -9,6 +9,8 @@
 ## Getting Started
 
 - The java source code of the **agent** can be found in the **DemoLitterAgent.java** file located in the following folder:
+http://github.com - automatic!
+[GitHub](http://github.com)
 ![Nottingham University](src\uk\ac\nott\cs\g53dia\multiagent\DemoLitterAgent.java)
 
 - **The agent has been improved** since the first project contained in the **Designing-Intelligent-Agents_SingleAgent-System**.
