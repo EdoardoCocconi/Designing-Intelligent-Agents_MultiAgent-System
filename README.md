@@ -12,7 +12,7 @@
 
 - The **java classes** programmed for the functioning of the **fleet** can be found in the [multiagent package](src/uk/ac/nott/cs/g53dia/multiagent).
 
-- The agent has been improved since the **first project** contained in [Designing-Intelligent-Agents_SingleAgent-System](https://github.com/Edococco97/Designing-Intelligent-Agents_SingleAgent-System).
+- The agent has been improved since the **first project** contained in [Designing-Intelligent-Agents_SingleAgent-System](https://github.com/EdoardoCocconi/Designing-Intelligent-Agents_SingleAgent-System).
 
 - The source code of the given **environment** in which the agent operates can be found in the [multilibrary package](src/uk/ac/nott/cs/g53dia/multilibrary).
 
