@@ -120,11 +120,19 @@ The performance would be increased if the agents could spawn at different points
 
 <br>
 
-![Score Screenshot](Assets/Score.jpg)
+![Individual Agent Score Screenshot](Assets/SingleAgentScore.jpg)
 
 <br>
 
-Agent's average score over 10 runs: 3.643E04
+Agent's average score with 1 agent: 3.707E04
+
+<br>
+
+![MAS Score Screenshot](Assets/MultiAgentScore.jpg)
+
+<br>
+
+Agent's average score with 2 agents: 3.475E04
 
 <br>
 <br>
