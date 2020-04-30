@@ -45,6 +45,31 @@ recycling it must be taken to a recycling station before waste is loaded
 
 <br>
 
+## Agent Architecture
+
+The agent has a reactive architecture with hierarchical control. The hierarchy is implemented in the Sense method of DemoLitterAgent as a series of if-conditions. The higher the priority the earlier the condition is checked. If a condition is met, the corresponding behavior is triggered. The behaviors are listed here from highest priority to lowest priority:
+
+-	**RechargeBehaviour:** if the agent is on the target RechargeStation perform a RechargeAction, otherwise MoveTowards RechargeStation.
+-	**CollectBehaviour:** if the agent is on the target LitterBin perform a LoadAction, otherwise MoveTowards LitterBin.
+-	**DisposeBehaviour:** if the agent is on the target Station perform a DisposeAction, otherwise MoveTowards Station.
+-	**ExploreBehaviour:** If the agent is at distance <= 30 from the origin get away from the origin, else MoveTowards origin.
+
+The Sense method receives percepts from 3 Sensors:
+
+-	**RechargeDetector:** detects recharge stations inside a radius that is related to how much battery the agent has already lost. If there are recharge stations in this radius, RechargeBehaviour is triggered.
+-	**LitterDetector:** detects the bin with the highest litter over distance ratio within the specified field of view.
+-	**StationDetector:** detects the closest station.
+
+The sense method runs at every timestep inside senseAndAct and selects a Behaviour. If nothing is detected, the ExploreBehaviour is selected. The selected behaviors is carried out by the Act method inside senseAndAct.
+
+<br>
+
+## How has the single agent been improved since the first project?
+
+The coursework 1 agent needed to be optimized to succeed in coursework 2 because run times were largely exceeding 10 minutes with multiple agents. To increase efficiency, the map has been modified from a single HashMap including all the explored cells to HashMaps and ArrayLists including only non-empty cells of a specific kind. This decreases the number of both read and write operations. During construction, the agents are assigned an “agentID” that distinctively identifies them and a unique exploration direction under the name of “errorDestination”.
+
+<br>
+
 ## Are the agents specialised?
 
 The agents are all of the same kind. In real world applications, different robots usually leverage their unique hardware capabilities to perform the task they excel at. However, in a simulation every agent can be “general purpose” and just read the situation at every instant to determine the best course of action. Therefore, limiting each agent to specific tasks decreases their effectiveness and the overall performance of the fleet.
@@ -54,26 +79,6 @@ The agents are all of the same kind. In real world applications, different robot
 ## How many agents are there in the Multi-Agent System (MAS)?
 
 The MAS is composed by 2 agents in total. The agents compete for the same tasks and an increase in the number of agents results in a decrease in the points scored per agent. Therefore, since the agents are not specialized, there is no reason to increase their number above 2. Having only 2 agents also allows for a quick run time, which should be below 10 minutes on most computers.
-
-<br>
-
-## Agent Architecture
-
-The agent has a reactive architecture with hierarchical control. The hierarchy is implemented in the Sense method of DemoLitterAgent as a series of if-conditions. The higher the priority the earlier the condition is checked. If a condition is met, the corresponding behavior is triggered. The behaviors are listed here from highest priority to lowest priority:
-
--	**RechargeBehaviour:** if the agent is on the target RechargeStation perform a RechargeAction, otherwise MoveTowards RechargeStation.
--	**CollectBehaviour:** if the agent is on the target LitterBin perform a LoadAction, otherwise MoveTowards LitterBin.
--	**DisposeBehaviour:** if the agent is on the target Station perform a DisposeAction, otherwise MoveTowards Station.
--	**ExploreBehaviour:**
-If the agent is at distance <= 30 from the origin get away from the origin, else MoveTowards origin.
-
-The Sense method receives percepts from 3 Sensors:
-
--	**RechargeDetector:** detects recharge stations inside a radius that is related to how much battery the agent has already lost. If there are recharge stations in this radius, RechargeBehaviour is triggered.
--	**LitterDetector:** detects the bin with the highest litter over distance ratio within the specified field of view.
--	**StationDetector:** detects the closest station.
-
-The sense method runs at every timestep inside senseAndAct and selects a Behaviour. If nothing is detected, the ExploreBehaviour is selected. The selected behaviors is carried out by the Act method inside senseAndAct.
 
 <br>
 
@@ -97,9 +102,13 @@ The bin with the highest litter over distance ratio is found by the readSensor m
 
 <br>
 
-## Chosing the station
+## Why the fleet architecture is appropriate for the project
 
-The agent goes to the closest station. This allows it to complete the current cluster of tasks before going to the next one. This is implemented in the readSensor method in the StationDetector class.
+As explained above, the current design of the “fleetControlCentre” allows to coordinate the agents in such a way that they never target the same task and they never fall victim of changes of plans. Further experiments included preventing an agent to claim a task that close to a task that has already been claimed by another agent. This was done to prevent competition between agents, however no matter the distancing radius, this approach always yielded inferior results. Throughout the coursework, giving the individual agents the freedom to take decisions based on the current situation has been rewarded with higher scores most of the times.
+
+The performance of the MAS would be greatly decreased if the environment only contains one main task and a number of secondary low value tasks. Only one agent can claim one task and the agents are currently not able to cooperate on a single high value task.
+
+The performance would be increased if the agents could spawn at different points of the environment so they don’t have to compete with each other.
 
 <br>
 
