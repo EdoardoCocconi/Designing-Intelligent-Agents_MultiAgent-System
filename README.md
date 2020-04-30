@@ -70,7 +70,7 @@ To learn more about the individual agent click [here](https://github.com/Edococc
 
 ## How has the individual agent been improved since the first project?
 
-The coursework 1 agent needed to be optimized to succeed in coursework 2 because run times were largely exceeding 10 minutes with multiple agents. To increase efficiency, the map has been modified from a single HashMap including all the explored cells to HashMaps and ArrayLists including only non-empty cells of a specific kind. This decreases the number of both read and write operations. During construction, the agents are assigned an “agentID” that distinctively identifies them and a unique exploration direction under the name of “errorDestination”.
+The project 1 agent needed to be optimized to succeed in project 2 because run times were largely exceeding 10 minutes with multiple agents. To increase efficiency, the map has been modified from a single HashMap including all the explored cells to HashMaps and ArrayLists including only non-empty cells of a specific kind. This decreases the number of both read and write operations. During construction, the agents are assigned an “agentID” that distinctively identifies them and a unique exploration direction under the name of “errorDestination”.
 
 <br>
 
@@ -108,7 +108,7 @@ The bin with the highest litter over distance ratio is found by the readSensor m
 
 ## Why the fleet architecture is appropriate for the project
 
-As explained above, the current design of the “fleetControlCentre” allows to coordinate the agents in such a way that they never target the same task and they never fall victim of changes of plans. Further experiments included preventing an agent to claim a task that close to a task that has already been claimed by another agent. This was done to prevent competition between agents, however no matter the distancing radius, this approach always yielded inferior results. Throughout the coursework, giving the individual agents the freedom to take decisions based on the current situation has been rewarded with higher scores most of the times.
+As explained above, the current design of the “fleetControlCentre” allows to coordinate the agents in such a way that they never target the same task and they never fall victim of changes of plans. Further experiments included preventing an agent to claim a task that close to a task that has already been claimed by another agent. This was done to prevent competition between agents, however no matter the distancing radius, this approach always yielded inferior results. Throughout the project, giving the individual agents the freedom to take decisions based on the current situation has been rewarded with higher scores most of the times.
 
 The performance of the MAS would be greatly decreased if the environment only contains one main task and a number of secondary low value tasks. Only one agent can claim one task and the agents are currently not able to cooperate on a single high value task.
 
