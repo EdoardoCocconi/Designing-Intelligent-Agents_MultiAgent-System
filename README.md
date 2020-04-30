@@ -64,7 +64,7 @@ The Sense method receives percepts from 3 Sensors:
 
 The sense method runs at every timestep inside senseAndAct and selects a Behaviour. If nothing is detected, the ExploreBehaviour is selected. The selected behaviors is carried out by the Act method inside senseAndAct.
 
-To learn more about the individual agent click [here](https://github.com/Edococco97/Designing-Intelligent-Agents_SingleAgent-System/blob/master/README.md)
+To learn more about the individual agent click [here](https://github.com/Edococco97/Designing-Intelligent-Agents_SingleAgent-System/blob/master/README.md).
 
 <br>
 
