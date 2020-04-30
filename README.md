@@ -120,7 +120,7 @@ The performance would be increased if the agents could spawn at different points
 
 <br>
 
-![Individual Agent Score Screenshot](Assets/SingleAgentScore.jpg | width = 100)
+![Individual Agent Score Screenshot](Assets/SingleAgentScore.jpg | width = "100")
 
 <br>
 
@@ -128,7 +128,7 @@ Agent's average score with 1 agent: 3.707E04
 
 <br>
 
-![MAS Score Screenshot](Assets/MultiAgentScore.jpg | width = 100)
+![MAS Score Screenshot](Assets/MultiAgentScore.jpg | width = "100")
 
 <br>
 
