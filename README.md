@@ -24,7 +24,7 @@
 
 ## Environment
 
-The problem consists of a 2D environment, in which an agent must transport waste and recycling from bins to stations. The goal of the agent is to transport as much waste and recycling as possible in a fixed period of time.
+The Multi-Agent Project builds on the Single Agent Project and uses the same 2D environment and task. However, in the second project, multiple cooperating agents must collect waste and recycling from litter bins. Waste must be taken to waste stations and recycling to recycling stations. The goal of the agents is to transport as much waste and recycling as possible in a fixed period of time.
 
 - the environment is an infinite 2D grid that contains randomly distributed recycling and waste bins, waste and recycling stations, and recharging points
 - bins periodically generate tasks to transport a specified amount of recycling or waste (max 100 litres)
@@ -43,9 +43,11 @@ recycling it must be taken to a recycling station before waste is loaded
 - a run lasts 10,000 timesteps unless the agent runs out of battery, in which case the run is terminated
 - the success (score) of the agent is determined by the total amount of recycling and waste collected
 
+The multi-agent system must contain at least two agents.
+
 <br>
 
-## Agent Architecture
+## Individual Agent Architecture
 
 The agent has a reactive architecture with hierarchical control. The hierarchy is implemented in the Sense method of DemoLitterAgent as a series of if-conditions. The higher the priority the earlier the condition is checked. If a condition is met, the corresponding behavior is triggered. The behaviors are listed here from highest priority to lowest priority:
 
@@ -62,9 +64,11 @@ The Sense method receives percepts from 3 Sensors:
 
 The sense method runs at every timestep inside senseAndAct and selects a Behaviour. If nothing is detected, the ExploreBehaviour is selected. The selected behaviors is carried out by the Act method inside senseAndAct.
 
+To learn more about the individual agent click [here](https://github.com/Edococco97/Designing-Intelligent-Agents_SingleAgent-System/blob/master/README.md)
+
 <br>
 
-## How has the single agent been improved since the first project?
+## How has the individual agent been improved since the first project?
 
 The coursework 1 agent needed to be optimized to succeed in coursework 2 because run times were largely exceeding 10 minutes with multiple agents. To increase efficiency, the map has been modified from a single HashMap including all the explored cells to HashMaps and ArrayLists including only non-empty cells of a specific kind. This decreases the number of both read and write operations. During construction, the agents are assigned an “agentID” that distinctively identifies them and a unique exploration direction under the name of “errorDestination”.
 
