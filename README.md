@@ -132,6 +132,10 @@ The performance would be increased if the agents could spawn at different points
 
 ## Performance
 
+<div align="justify">
+  The performance of the single agent is measured in liters of litter collected during the 10000 timesteps simulation. This measure can be used to put in perspective the average performance of the agents in the Multi-Agent System. The average of the performances is inevitably reduced as the agents compete for the same resources.
+</div>
+
 <br>
 
 ![Individual Agent Score Screenshot](Assets/SAscore.jpg)
