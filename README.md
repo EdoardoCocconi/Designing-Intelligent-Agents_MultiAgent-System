@@ -6,6 +6,22 @@
 
 <br>
 
+<div align="center">
+  <img src="Assets/MultiAgent.gif" alt="Agent Animation">
+</div>
+
+<br>
+
+<p align="center">
+  <b><i>Single Agent Simulation Output.</i></b>
+</p>
+
+<br>
+
+The Multi-Agent Project builds on the Single Agent Project and uses the same 2D environment and task. However, in the second project, multiple cooperating agents must collect waste and recycling from litter bins. Waste must be taken to waste stations and recycling to recycling stations. The goal of the agents is to transport as much waste and recycling as possible in a fixed period of time.
+
+<br>
+
 ## Getting Started
 
 - The java source code of the **improved agent** can be found [here](src/uk/ac/nott/cs/g53dia/multiagent/DemoLitterAgent.java).
@@ -23,8 +39,6 @@
 <br>
 
 ## Environment
-
-The Multi-Agent Project builds on the Single Agent Project and uses the same 2D environment and task. However, in the second project, multiple cooperating agents must collect waste and recycling from litter bins. Waste must be taken to waste stations and recycling to recycling stations. The goal of the agents is to transport as much waste and recycling as possible in a fixed period of time.
 
 - the environment is an infinite 2D grid that contains randomly distributed recycling and waste bins, waste and recycling stations, and recharging points
 - bins periodically generate tasks to transport a specified amount of recycling or waste (max 100 litres)

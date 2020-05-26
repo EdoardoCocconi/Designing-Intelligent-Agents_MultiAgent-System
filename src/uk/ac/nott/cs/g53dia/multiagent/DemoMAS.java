@@ -5,7 +5,7 @@ import uk.ac.nott.cs.g53dia.multilibrary.*;
 
 public class DemoMAS extends MAS {
 
-    private static int MAS_SIZE = 2;
+    private static int MAS_SIZE = 4;
     FleetControlCentre fleetControlCentre;
 
 
